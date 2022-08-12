@@ -15,4 +15,11 @@ base: core20
 
 parts:
   pandoc:
-    plugin: nil
+    plugin: dump
+    source: https://github.com/jgm/pandoc.git
+    source-tag: '2.19'
+    build-packages: [haskell-stack]
+    override-build: |
+      snapcraftctl build
+      stack setup
+      stack build
