@@ -8,18 +8,15 @@ description: |
 
 compression: lzo
 
-
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
 base: core20
 
 parts:
   pandoc:
-    plugin: dump
-    source: https://github.com/jgm/pandoc.git
-    source-tag: '2.19'
-    build-packages: [haskell-stack]
+    plugin: nil
+    build-packages: [haskell-platform]
     override-build: |
       snapcraftctl build
-      stack setup
-      stack build
+      cabal update
+      cabal install pandoc
