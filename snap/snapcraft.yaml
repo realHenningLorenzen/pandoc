@@ -9,14 +9,17 @@ description: |
 compression: lzo
 
 confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: stable
 
 base: core20
+architectures: [amd64]
 
 parts:
   pandoc:
-    plugin: nil
-    build-packages: [haskell-platform]
-    override-build: |
-      snapcraftctl build
-      cabal update
-      cabal install pandoc
+    plugin: dump
+    source: https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-linux-amd64.tar.gz
+    stage-packages: []
+
+apps:
+  pandoc:
+    command:  bin/pandoc
